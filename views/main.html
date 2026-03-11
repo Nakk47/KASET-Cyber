@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEC-OPS | Cyber News Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,800;1,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style type="text/tailwindcss">
+      @theme {
+        /* Clean, professional Grotesk fonts */
+        --font-heading: "Plus Jakarta Sans", sans-serif;
+        --font-body: "Inter", sans-serif;
+        --animate-ticker: scroll 40s linear infinite;
+        
+        @keyframes scroll {
+          from { transform: translateX(0); }
+          to { transform: translateX(-100%); }
+        }
+      }
+      body { @apply bg-[#05070a] text-slate-300 font-body antialiased; }
+    </style>
+</head>
+<body>
+
+    <nav class="sticky top-0 z-50 bg-[#05070a]/90 backdrop-blur-md border-b border-white/5 px-8 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-10">
+            <h1 class="text-2xl font-extrabold italic tracking-tighter text-white font-heading">
+                KASET-<span class="text-cyan-400">NEWS</span>
+            </h1>
+        </div>
+        <div class="flex items-center gap-6 text-[10px] font-bold uppercase tracking-[0.2em]">
+            <a href="#" class="text-cyan-400 border-b-2 border-cyan-400 pb-1">Dashboard</a>
+            <a href="#" class="text-slate-500 hover:text-white transition-colors">Archive</a>
+            <a href="#" class="text-slate-500 hover:text-white transition-colors">Contact</a>
+            <button class="bg-cyan-500 text-black px-4 py-2 rounded-sm ml-4 shadow-[0_0_15px_rgba(6,182,212,0.3)] font-bold">Register</button>
+        </div>
+    </nav>
+
+    <div class="bg-rose-600 text-white flex overflow-hidden border-y border-rose-500/20 py-2 relative">
+        <div class="absolute left-0 top-0 bottom-0 bg-rose-700 px-6 z-10 flex items-center border-r border-rose-500 shadow-2xl">
+            <span class="text-[10px] font-black uppercase italic animate-pulse tracking-widest">● LIVE THREAT FEED</span>
+        </div>
+        <div class="flex whitespace-nowrap animate-ticker pl-[180px]">
+            <div class="flex gap-16 px-4 text-xs font-bold uppercase tracking-[0.3em]">
+                <span>&bull; RANSOMHUB EXFILTRATION DETECTED</span>
+                <span>&bull; META PATCHES WHATSAPP ZERO-DAY</span>
+                <span>&bull; THAI MINISTRY INFRASTRUCTURE UNDER ACTIVE APT INTRUSION</span>
+                <span>&bull; ASEAN CYBER TASKFORCE CONVENES SUMMIT</span>
+            </div>
+            <div class="flex gap-16 px-4 text-xs font-bold uppercase tracking-[0.3em]" aria-hidden="true">
+                <span>&bull; RANSOMHUB EXFILTRATION DETECTED</span>
+                <span>&bull; META PATCHES WHATSAPP ZERO-DAY</span>
+                <span>&bull; THAI MINISTRY INFRASTRUCTURE UNDER ACTIVE APT INTRUSION</span>
+                <span>&bull; ASEAN CYBER TASKFORCE CONVENES SUMMIT</span>
+            </div>
+        </div>
+    </div>
+
+    <main class="max-w-[1400px] mx-auto px-8 py-12 grid grid-cols-12 gap-12">
+        
+        <aside class="col-span-12 lg:col-span-3 space-y-10 order-2 lg:order-1">
+            <section>
+                <h3 class="text-[10px] font-bold uppercase tracking-[0.4em] text-emerald-500 mb-6 border-l-2 border-emerald-500 pl-4">National News</h3>
+                <ul class="space-y-4 text-[13px] font-semibold uppercase tracking-tight">
+                    <li class="group flex items-center justify-between cursor-pointer text-white">
+                        <span>ALL</span>
+                        <span class="text-slate-600 font-mono text-[10px] group-hover:text-emerald-400 transition-colors">[42]</span>
+                    </li>
+                    <li class="group flex items-center justify-between cursor-pointer hover:text-white transition-colors">
+                        <span>Threat Intelligence</span>
+                        <span class="text-slate-600 font-mono text-[10px] group-hover:text-emerald-400">[12]</span>
+                    </li>
+                    <li class="group flex items-center justify-between cursor-pointer hover:text-white transition-colors">
+                        <span>Vulnerability</span>
+                        <span class="text-slate-600 font-mono text-[10px] group-hover:text-emerald-400">[08]</span>
+                    </li>
+                    <li class="group flex items-center justify-between cursor-pointer hover:text-white transition-colors">
+                        <span>Cyber Attacker</span>
+                        <span class="text-slate-600 font-mono text-[10px] group-hover:text-emerald-400">[15]</span>
+                    </li>
+                </ul>
+            </section>
+
+            <section>
+                <h3 class="text-[10px] font-bold uppercase tracking-[0.4em] text-cyan-400 mb-6 border-l-2 border-cyan-500 pl-4">International News</h3>
+                <ul class="space-y-4 text-[13px] font-semibold uppercase tracking-tight">
+                    <li class="group flex items-center justify-between cursor-pointer hover:text-white transition-colors">
+                        <span>ALL</span>
+                        <span class="text-slate-600 font-mono text-[10px] group-hover:text-cyan-400">[98]</span>
+                    </li>
+                    <li class="group flex items-center justify-between cursor-pointer hover:text-white transition-colors">
+                        <span>Threat Intelligence</span>
+                        <span class="text-slate-600 font-mono text-[10px] group-hover:text-cyan-400">[34]</span>
+                    </li>
+                    <li class="group flex items-center justify-between cursor-pointer hover:text-white transition-colors">
+                        <span>Vulnerability</span>
+                        <span class="text-slate-600 font-mono text-[10px] group-hover:text-cyan-400">[21]</span>
+                    </li>
+                    <li class="group flex items-center justify-between cursor-pointer hover:text-white transition-colors">
+                        <span>Cyber Attacker</span>
+                        <span class="text-slate-600 font-mono text-[10px] group-hover:text-cyan-400">[40]</span>
+                    </li>
+                </ul>
+            </section>
+
+            <div class="bg-rose-500/5 border border-rose-500/20 p-6 rounded-sm">
+                <p class="text-[9px] font-bold uppercase tracking-widest text-slate-500 mb-2">Global Alert Status</p>
+                <div class="text-4xl font-extrabold text-rose-500 font-heading italic tracking-tighter">HIGH</div>
+                <div class="mt-4 h-1 w-full bg-slate-800">
+                    <div class="h-full bg-rose-600 w-[85%]"></div>
+                </div>
+            </div>
+        </aside>
+
+        <section class="col-span-12 lg:col-span-9 order-1 lg:order-2">
+            <div class="mb-12">
+                <div class="flex gap-4 mb-4 items-center">
+                    <span class="bg-emerald-500/10 text-emerald-400 text-[10px] font-bold px-2 py-0.5 border border-emerald-500/20">NATIONAL</span>
+                    <span class="text-slate-600 text-[10px] font-bold tracking-[0.3em] uppercase">Status: Confirmed Breach</span>
+                </div>
+                <h2 class="text-5xl lg:text-7xl font-extrabold text-white leading-[1.1] font-heading uppercase italic tracking-tighter mb-6">
+                    Government Servers Hit by <span class="text-cyan-400 underline decoration-cyan-400/30">APT Campaign</span>
+                </h2>
+                <p class="text-lg text-slate-400 leading-relaxed max-w-2xl border-l-4 border-white/5 pl-6 font-medium">
+                    A state-sponsored actor has exfiltrated sensitive data from multiple Thai ministries. NCSA confirms a 14-week undetected breach targeting specific cloud infrastructure.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="aspect-video bg-white/5 border border-white/5 rounded-sm flex items-center justify-center text-[10px] font-mono tracking-widest text-slate-700 uppercase">Featured_Visual_1</div>
+                <div class="aspect-video bg-white/5 border border-white/5 rounded-sm flex items-center justify-center text-[10px] font-mono tracking-widest text-slate-700 uppercase">Featured_Visual_2</div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="mt-20 border-t border-white/5 py-10 px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <p class="text-[10px] font-bold uppercase tracking-widest text-slate-600">
+            © 2026 KASET-NEWS | Cybersecurity Monitoring Division
+        </p>
+        <div class="flex gap-8 text-[10px] font-bold uppercase tracking-widest text-slate-400">
+            <a href="#" class="hover:text-cyan-400 transition-colors">Privacy Policy</a>
+            <a href="#" class="hover:text-cyan-400 transition-colors">Terms of Service</a>
+            <a href="#" class="hover:text-cyan-400 transition-colors">API Status</a>
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search | KASET-NEWS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* Using the uploaded grid image as a repeating background */
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: #020608; 
+            background-image: url('image_9e3d99.png'); 
+            background-repeat: repeat;
+            color: #9ca3af; 
+        }
+        .cyber-title { font-weight: 900; letter-spacing: -0.02em; line-height: 0.9; text-transform: uppercase; }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <nav class="border-b border-gray-900 bg-[#020608]/95 backdrop-blur-sm px-8 py-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center space-x-10">
+            <div class="text-white text-2xl font-black tracking-tighter italic">
+                KASET-<span class="text-cyan-400">NEWS</span>
+            </div>
+            <div class="hidden lg:flex items-center space-x-6 text-[11px] font-bold tracking-widest text-gray-500 uppercase">
+                <a href="#" class="hover:text-white">Home</a>
+                <a href="#" class="hover:text-white">National</a>
+                <a href="#" class="hover:text-white">ASEAN</a>
+                <a href="#" class="hover:text-white">International</a>
+                <a href="#" class="text-cyan-400 border-b-2 border-cyan-400 pb-5 -mb-5">Search</a>
+                <a href="#" class="hover:text-white">About Us</a>
+            </div>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button class="text-xs font-bold text-gray-400 hover:text-white uppercase tracking-widest">Login</button>
+            <button class="bg-cyan-400 text-black text-xs font-black px-4 py-2 uppercase tracking-tighter">Register</button>
+        </div>
+    </nav>
+
+    <header class="max-w-7xl mx-auto px-8 pt-16 pb-12">
+        <div class="text-cyan-400 text-[10px] font-black tracking-[0.2em] mb-6 uppercase">
+            <span class="opacity-50">//</span> Kaset-News <span class="mx-2 text-gray-700">/</span> Search
+        </div>
+        <h1 class="cyber-title text-7xl text-white mb-4">Search Articles</h1>
+        <p class="text-gray-500 text-lg uppercase font-bold tracking-tight">Search across national, ASEAN, and international cyber news.</p>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-8 pb-20">
+        <div class="flex mb-8">
+            <input type="text" placeholder="Search articles, CVEs, threat actors..." 
+                class="w-full bg-gray-900/40 border border-gray-800 p-6 text-gray-300 focus:outline-none focus:border-cyan-400 font-bold text-sm tracking-widest">
+            <button class="bg-cyan-400 text-black px-12 font-black uppercase tracking-widest text-sm">Search</button>
+        </div>
+
+        <div class="flex flex-wrap gap-2 mb-12">
+            <button class="px-5 py-2 border border-cyan-400 text-cyan-400 text-[10px] font-black uppercase tracking-widest">All</button>
+            <button class="px-5 py-2 border border-gray-800 text-gray-600 text-[10px] font-black uppercase tracking-widest">National</button>
+            <button class="px-5 py-2 border border-gray-800 text-gray-600 text-[10px] font-black uppercase tracking-widest">ASEAN</button>
+            <button class="px-5 py-2 border border-gray-800 text-gray-600 text-[10px] font-black uppercase tracking-widest">International</button>
+            <button class="px-5 py-2 border border-gray-800 text-gray-600 text-[10px] font-black uppercase tracking-widest">Malware</button>
+            <button class="px-5 py-2 border border-gray-800 text-gray-600 text-[10px] font-black uppercase tracking-widest">Breach</button>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-12">
+            <div class="lg:w-2/3 space-y-12">
+                <div class="text-[10px] font-black text-gray-700 uppercase tracking-[0.3em] border-b border-gray-900 pb-4">Showing 10 Results</div>
+
+                <article class="flex gap-8 group">
+                    <div class="w-48 h-32 bg-gray-900/40 border border-gray-800 flex items-center justify-center shrink-0">
+                        <span class="text-[10px] text-gray-800 font-bold">IMG</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-3 text-[9px] font-black uppercase tracking-widest">
+                            <span class="text-[#00ff88] bg-[#00ff88]/10 px-1 py-0.5 border border-[#00ff88]/20">TH National</span>
+                            <span class="text-gray-600">Mar 04, 2026</span>
+                        </div>
+                        <h2 class="text-white text-xl font-bold group-hover:text-cyan-400 transition-colors">Thai Government Servers Hit by Sophisticated APT Campaign</h2>
+                        <p class="text-sm text-gray-500 leading-relaxed">NCSA confirms data exfiltration from at least three agencies following a 14-week intrusion.</p>
+                        <div class="text-[9px] font-bold text-gray-600 uppercase">Siriporn K. • 7 Min Read</div>
+                    </div>
+                </article>
+
+                <article class="flex gap-8 group">
+                    <div class="w-48 h-32 bg-gray-900/40 border border-gray-800 flex items-center justify-center shrink-0">
+                        <span class="text-[10px] text-gray-800 font-bold">IMG</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-3 text-[9px] font-black uppercase tracking-widest">
+                            <span class="text-[#facc15] flex items-center"><span class="mr-1">●</span> ASEAN</span>
+                            <span class="text-gray-600">Mar 04, 2026</span>
+                        </div>
+                        <h2 class="text-white text-xl font-bold group-hover:text-cyan-400 transition-colors">Singapore MAS Fines DBS $2.1M Over Repeated Failures</h2>
+                        <p class="text-sm text-gray-500 leading-relaxed">Largest-ever penalty following a third system outage in 18 months.</p>
+                        <div class="text-[9px] font-bold text-gray-600 uppercase">Priya S. • 5 Min Read</div>
+                    </div>
+                </article>
+
+                <article class="flex gap-8 group">
+                    <div class="w-48 h-32 bg-gray-900/40 border border-gray-800 flex items-center justify-center shrink-0">
+                        <span class="text-[10px] text-gray-800 font-bold">IMG</span>
+                    </div>
+                    <div class="space-y-2">
+                        <div class="flex items-center space-x-3 text-[9px] font-black uppercase tracking-widest">
+                            <span class="text-[#ef4444] flex items-center"><span class="mr-1">🦠</span> Malware</span>
+                            <span class="text-gray-600">Mar 03, 2026</span>
+                        </div>
+                        <h2 class="text-white text-xl font-bold group-hover:text-cyan-400 transition-colors">FakeUpdate Campaign Deploys New AMOS Stealer</h2>
+                        <p class="text-sm text-gray-500 leading-relaxed">Researchers identify browser update lures distributing evolved AMOS stealer.</p>
+                        <div class="text-[9px] font-bold text-gray-600 uppercase">Nattapong R. • 6 Min Read</div>
+                    </div>
+                </article>
+            </div>
+
+            <aside class="lg:w-1/3">
+                <div class="bg-gray-900/30 border border-gray-800 p-8">
+                    <h3 class="text-cyan-400 text-[10px] font-black uppercase tracking-[0.2em] mb-8">Popular Searches</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <a href="#" class="text-[9px] font-bold text-gray-600 border border-gray-800 px-3 py-1.5 hover:text-white hover:border-cyan-400 uppercase tracking-widest">#APT</a>
+                        <a href="#" class="text-[9px] font-bold text-gray-600 border border-gray-800 px-3 py-1.5 hover:text-white hover:border-cyan-400 uppercase tracking-widest">#zero-day</a>
+                        <a href="#" class="text-[9px] font-bold text-gray-600 border border-gray-800 px-3 py-1.5 hover:text-white hover:border-cyan-400 uppercase tracking-widest">#phishing</a>
+                        <a href="#" class="text-[9px] font-bold text-gray-600 border border-gray-800 px-3 py-1.5 hover:text-white hover:border-cyan-400 uppercase tracking-widest">#NCSA</a>
+                        <a href="#" class="text-[9px] font-bold text-gray-600 border border-gray-800 px-3 py-1.5 hover:text-white hover:border-cyan-400 uppercase tracking-widest">#CVE-2026</a>
+                        <a href="#" class="text-[9px] font-bold text-gray-600 border border-gray-800 px-3 py-1.5 hover:text-white hover:border-cyan-400 uppercase tracking-widest">#LockBit</a>
+                        <a href="#" class="text-[9px] font-bold text-gray-600 border border-gray-800 px-3 py-1.5 hover:text-white hover:border-cyan-400 uppercase tracking-widest">#deepfake</a>
+                        <a href="#" class="text-[9px] font-bold text-gray-600 border border-gray-800 px-3 py-1.5 hover:text-white hover:border-cyan-400 uppercase tracking-widest">#BankBot</a>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <footer class="border-t border-gray-900 bg-[#020608] pt-16 pb-8 px-8">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-4 gap-12 mb-16">
+            <div class="lg:col-span-1">
+                <div class="text-white text-xl font-black italic mb-6">KASET-<span class="text-cyan-400">NEWS</span></div>
+                <p class="text-xs text-gray-600 leading-relaxed">Thailand's leading cybersecurity news platform covering national, ASEAN, and international threats.</p>
+            </div>
+            <div class="grid grid-cols-3 lg:col-span-3 gap-8">
+                <div>
+                    <h5 class="text-cyan-400 text-[10px] font-black uppercase mb-6">Regions</h5>
+                    <ul class="text-xs text-gray-600 space-y-3"><li>National</li><li>ASEAN</li><li>International</li></ul>
+                </div>
+                <div>
+                    <h5 class="text-cyan-400 text-[10px] font-black uppercase mb-6">Topics</h5>
+                    <ul class="text-xs text-gray-600 space-y-3"><li>Malware</li><li>Data Breaches</li><li>Vulnerabilities</li><li>Policy & Law</li></ul>
+                </div>
+                <div>
+                    <h5 class="text-cyan-400 text-[10px] font-black uppercase mb-6">Platform</h5>
+                    <ul class="text-xs text-gray-600 space-y-3"><li>Login</li><li>Register</li><li>Admin</li><li>About Us</li></ul>
+                </div>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto flex justify-between text-[9px] text-gray-800 font-bold uppercase tracking-widest">
+            <div>© 2026 KASET-NEWS • ALL RIGHTS RESERVED</div>
+            <div>BUILT FOR CYBERSECURITY PROFESSIONALS</div>
+        </div>
+    </footer>
+
+</body>
+</html>

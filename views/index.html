@@ -1,0 +1,1376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Kaset-News · Cyber Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Bitter:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#05070a;
+  --surface:#080b10;
+  --surface2:#0d1017;
+  --border:#161e28;
+  --border2:#1e2a38;
+  --accent:#00d4ff;
+  --accent-dim:rgba(0,212,255,0.12);
+  --red:#ff3c5e;
+  --red-dim:rgba(255,60,94,0.12);
+  --green:#00e676;
+  --yellow:#ffd740;
+  --text:#9ab0c8;
+  --text2:#c8daea;
+  --heading:#e8f4ff;
+  --muted:#3a4f65;
+  --nav-h:56px;
+}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:'Bitter',serif;
+  font-size:15px;
+  line-height:1.7;
+  min-height:100vh;
+  cursor:default;
+}
+
+/* GRID BG */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:linear-gradient(rgba(0,212,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,255,0.025) 1px,transparent 1px);
+  background-size:48px 48px;
+  pointer-events:none;z-index:0;
+}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none;position:relative;z-index:1;min-height:100vh;}
+.page.active{display:block;}
+
+/* ── NAV ── */
+nav{
+  position:sticky;top:0;z-index:100;
+  height:var(--nav-h);
+  background:rgba(5,7,10,0.92);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;
+  padding:0 32px;gap:0;
+}
+.nav-logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:20px;
+  color:var(--heading);letter-spacing:1px;
+  margin-right:40px;cursor:pointer;flex-shrink:0;
+}
+.nav-logo span{color:var(--accent);}
+.nav-links{display:flex;gap:0;flex:1;overflow:hidden;}
+.nav-link{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;
+  color:var(--muted);padding:0 16px;height:var(--nav-h);
+  display:flex;align-items:center;cursor:pointer;
+  border-bottom:2px solid transparent;
+  transition:color .2s,border-color .2s;white-space:nowrap;
+  text-transform:uppercase;
+}
+.nav-link:hover{color:var(--text2);}
+.nav-link.active{color:var(--accent);border-bottom-color:var(--accent);}
+.nav-right{margin-left:auto;display:flex;gap:8px;align-items:center;flex-shrink:0;}
+.nav-search{
+  background:var(--surface2);border:1px solid var(--border2);
+  color:var(--text2);font-family:'JetBrains Mono',monospace;font-size:11px;
+  padding:6px 12px;outline:none;width:180px;letter-spacing:1px;
+}
+.nav-search::placeholder{color:var(--muted);}
+.nav-search:focus{border-color:var(--accent);}
+.nav-btn{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;
+  padding:6px 16px;border:1px solid var(--border2);background:transparent;
+  color:var(--text2);cursor:pointer;transition:all .2s;
+}
+.nav-btn:hover{border-color:var(--accent);color:var(--accent);}
+.nav-btn.primary{background:var(--accent);color:#000;border-color:var(--accent);}
+.nav-btn.primary:hover{background:transparent;color:var(--accent);}
+
+/* ── TICKER ── */
+.ticker{
+  background:var(--red);height:32px;
+  display:flex;align-items:center;overflow:hidden;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1px;color:#000;
+}
+.ticker-label{
+  background:#000;color:var(--red);padding:0 16px;height:100%;
+  display:flex;align-items:center;font-weight:500;letter-spacing:2px;flex-shrink:0;
+}
+.ticker-track{
+  display:flex;gap:60px;animation:ticker 40s linear infinite;white-space:nowrap;padding:0 20px;
+}
+@keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.ticker-sep{opacity:0.4;}
+
+/* ── CONTAINER ── */
+.container{max-width:1200px;margin:0 auto;padding:0 24px;}
+
+/* ── SECTION LABEL ── */
+.section-label{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;
+  color:var(--accent);text-transform:uppercase;margin-bottom:16px;
+  display:flex;align-items:center;gap:12px;
+}
+.section-label::after{content:'';flex:1;height:1px;background:var(--border2);}
+
+/* ── TAGS / BADGES ── */
+.tag{
+  display:inline-block;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:1px;padding:3px 8px;text-transform:uppercase;
+}
+.tag-national{background:rgba(0,230,118,0.12);color:var(--green);border:1px solid rgba(0,230,118,0.25);}
+.tag-asean{background:rgba(255,215,64,0.12);color:var(--yellow);border:1px solid rgba(255,215,64,0.25);}
+.tag-international{background:var(--accent-dim);color:var(--accent);border:1px solid rgba(0,212,255,0.25);}
+.tag-malware{background:var(--red-dim);color:var(--red);border:1px solid rgba(255,60,94,0.25);}
+.tag-breach{background:rgba(255,100,0,0.12);color:#ff7c3c;border:1px solid rgba(255,100,0,0.25);}
+
+/* ── ARTICLE CARDS ── */
+.card{
+  background:var(--surface);border:1px solid var(--border);
+  overflow:hidden;cursor:pointer;transition:border-color .25s,transform .2s;
+}
+.card:hover{border-color:var(--border2);transform:translateY(-2px);}
+.card-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--surface2);display:block;position:relative;overflow:hidden;}
+.card-img-placeholder{
+  width:100%;aspect-ratio:16/9;background:var(--surface2);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);
+  letter-spacing:2px;border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.card-img-placeholder::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--surface2) 0%,rgba(0,212,255,0.04) 100%);
+}
+.card-body{padding:16px;}
+.card-meta{display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap;}
+.card-date{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
+.card-title{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:15px;
+  color:var(--heading);line-height:1.35;margin-bottom:8px;
+}
+.card:hover .card-title{color:var(--accent);}
+.card-excerpt{font-size:13px;color:var(--text);line-height:1.6;}
+
+/* ── HERO ── */
+.hero{
+  border-bottom:1px solid var(--border);
+  padding:48px 0 40px;margin-bottom:48px;
+}
+.hero-inner{display:grid;grid-template-columns:1fr 380px;gap:40px;align-items:center;}
+.hero-tag{margin-bottom:12px;}
+.hero-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:38px;
+  color:var(--heading);line-height:1.15;margin-bottom:16px;letter-spacing:-0.5px;
+}
+.hero-title span{color:var(--accent);}
+.hero-excerpt{font-size:16px;line-height:1.75;margin-bottom:20px;color:var(--text2);}
+.hero-meta{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;}
+.hero-img{
+  background:var(--surface2);border:1px solid var(--border);
+  aspect-ratio:4/3;display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);
+  letter-spacing:2px;position:relative;overflow:hidden;
+}
+.hero-img::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 60%,rgba(0,212,255,0.05));
+}
+
+/* ── GRIDS ── */
+.grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+.grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;}
+.grid-main-side{display:grid;grid-template-columns:1fr 300px;gap:32px;}
+
+/* ── SIDEBAR ── */
+.sidebar-widget{border:1px solid var(--border);background:var(--surface);margin-bottom:20px;}
+.widget-header{
+  padding:12px 16px;border-bottom:1px solid var(--border);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:var(--accent);text-transform:uppercase;background:var(--surface2);
+}
+.widget-body{padding:16px;}
+.cat-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:8px 0;border-bottom:1px solid var(--border);cursor:pointer;
+  font-size:13px;color:var(--text2);transition:color .2s;
+}
+.cat-item:last-child{border-bottom:none;}
+.cat-item:hover{color:var(--accent);}
+.cat-count{
+  font-family:'JetBrains Mono',monospace;font-size:10px;
+  color:var(--muted);background:var(--surface2);padding:2px 6px;
+}
+.tag-cloud{display:flex;flex-wrap:wrap;gap:6px;}
+.tag-cloud-item{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;
+  padding:4px 10px;border:1px solid var(--border2);color:var(--muted);cursor:pointer;
+  transition:all .2s;
+}
+.tag-cloud-item:hover{border-color:var(--accent);color:var(--accent);}
+
+/* ── ARTICLE LIST ITEM ── */
+.list-item{
+  display:grid;grid-template-columns:80px 1fr;gap:12px;
+  padding:14px 0;border-bottom:1px solid var(--border);cursor:pointer;
+  transition:opacity .2s;
+}
+.list-item:last-child{border-bottom:none;}
+.list-item:hover{opacity:0.8;}
+.list-thumb{
+  background:var(--surface2);border:1px solid var(--border);
+  aspect-ratio:1;display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-family:'JetBrains Mono',monospace;color:var(--muted);
+}
+.list-title{
+  font-family:'Syne',sans-serif;font-weight:600;font-size:13px;
+  color:var(--heading);line-height:1.35;margin-bottom:4px;
+}
+.list-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;}
+
+/* ── PAGE HEADER ── */
+.page-header{
+  border-bottom:1px solid var(--border);padding:40px 0 32px;margin-bottom:40px;
+  background:linear-gradient(180deg,rgba(0,212,255,0.03) 0%,transparent 100%);
+}
+.page-header-label{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;
+  color:var(--muted);text-transform:uppercase;margin-bottom:8px;
+}
+.page-header-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:32px;
+  color:var(--heading);letter-spacing:-0.5px;margin-bottom:8px;
+}
+.page-header-sub{font-size:14px;color:var(--text);}
+
+/* ── ARTICLE DETAIL ── */
+.article-header{padding:48px 0 40px;border-bottom:1px solid var(--border);margin-bottom:40px;}
+.article-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:36px;
+  color:var(--heading);line-height:1.2;letter-spacing:-0.5px;margin-bottom:20px;
+}
+.article-meta-bar{
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;
+  padding:16px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);
+}
+.article-meta-bar strong{color:var(--text2);}
+.article-body{max-width:720px;}
+.article-body p{margin-bottom:20px;font-size:16px;line-height:1.85;color:var(--text2);}
+.article-body h2{
+  font-family:'Syne',sans-serif;font-weight:700;font-size:22px;
+  color:var(--heading);margin:32px 0 12px;
+}
+.article-body .lead{font-size:18px;color:var(--heading);line-height:1.7;font-style:italic;}
+.article-featured-img{
+  width:100%;max-height:400px;background:var(--surface2);border:1px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+  letter-spacing:2px;margin-bottom:32px;aspect-ratio:16/7;
+  position:relative;overflow:hidden;
+}
+.article-featured-img::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(0,212,255,0.03) 0%,rgba(255,60,94,0.03) 100%);
+}
+.blockquote{
+  border-left:3px solid var(--accent);margin:24px 0;padding:16px 20px;
+  background:var(--surface);font-style:italic;color:var(--text2);font-size:16px;
+}
+
+/* ── SEARCH ── */
+.search-bar-big{
+  display:flex;gap:0;margin-bottom:32px;border:1px solid var(--border2);
+}
+.search-input-big{
+  flex:1;background:var(--surface);border:none;padding:14px 20px;
+  font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--heading);outline:none;
+}
+.search-input-big::placeholder{color:var(--muted);}
+.search-btn-big{
+  background:var(--accent);color:#000;border:none;padding:0 28px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;cursor:pointer;
+  font-weight:500;
+}
+.filter-chips{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;}
+.chip{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;
+  padding:6px 14px;border:1px solid var(--border2);color:var(--muted);
+  cursor:pointer;transition:all .2s;text-transform:uppercase;
+}
+.chip:hover,.chip.active{border-color:var(--accent);color:var(--accent);}
+.search-results-count{
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+  letter-spacing:1px;margin-bottom:20px;padding-bottom:12px;border-bottom:1px solid var(--border);
+}
+
+/* ── AUTH ── */
+.auth-wrap{
+  min-height:calc(100vh - var(--nav-h));
+  display:flex;align-items:center;justify-content:center;padding:40px 24px;
+}
+.auth-box{
+  width:100%;max-width:440px;background:var(--surface);border:1px solid var(--border);padding:40px;
+}
+.auth-logo{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:24px;
+  color:var(--heading);text-align:center;margin-bottom:6px;letter-spacing:1px;
+}
+.auth-logo span{color:var(--accent);}
+.auth-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);
+  letter-spacing:2px;text-align:center;margin-bottom:32px;}
+.form-group{margin-bottom:20px;}
+.form-label{
+  display:block;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:2px;color:var(--muted);margin-bottom:8px;text-transform:uppercase;
+}
+.form-input{
+  width:100%;background:var(--surface2);border:1px solid var(--border2);
+  padding:12px 14px;color:var(--heading);font-family:'JetBrains Mono',monospace;
+  font-size:13px;outline:none;transition:border-color .2s;
+}
+.form-input:focus{border-color:var(--accent);}
+.form-input::placeholder{color:var(--muted);}
+.form-btn{
+  width:100%;background:var(--accent);color:#000;border:none;padding:14px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2px;
+  cursor:pointer;font-weight:600;margin-top:8px;transition:opacity .2s;
+}
+.form-btn:hover{opacity:0.85;}
+.auth-footer{
+  text-align:center;margin-top:24px;font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--muted);letter-spacing:1px;
+}
+.auth-footer a{color:var(--accent);cursor:pointer;}
+.auth-divider{
+  border:none;border-top:1px solid var(--border);margin:24px 0;
+}
+
+/* ── ADMIN ── */
+.admin-layout{display:grid;grid-template-columns:220px 1fr;min-height:calc(100vh - var(--nav-h));}
+.admin-sidebar{
+  background:var(--surface);border-right:1px solid var(--border);padding:24px 0;
+}
+.admin-nav-item{
+  display:flex;align-items:center;gap:10px;padding:12px 20px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;
+  color:var(--muted);cursor:pointer;transition:all .2s;
+  text-transform:uppercase;border-left:2px solid transparent;
+}
+.admin-nav-item:hover{color:var(--text2);background:var(--surface2);}
+.admin-nav-item.active{color:var(--accent);background:var(--accent-dim);border-left-color:var(--accent);}
+.admin-icon{font-size:14px;}
+.admin-main{padding:32px;}
+.admin-header{margin-bottom:28px;}
+.admin-title{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:24px;
+  color:var(--heading);margin-bottom:4px;
+}
+.admin-sub{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);letter-spacing:1px;}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:32px;}
+.stat-card{
+  background:var(--surface);border:1px solid var(--border);padding:20px;
+}
+.stat-num{
+  font-family:'Syne',sans-serif;font-weight:800;font-size:32px;
+  color:var(--accent);line-height:1;margin-bottom:4px;
+}
+.stat-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;}
+.data-table{width:100%;border-collapse:collapse;font-size:13px;}
+.data-table th{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;
+  color:var(--muted);text-align:left;padding:10px 14px;
+  border-bottom:1px solid var(--border);background:var(--surface2);
+}
+.data-table td{
+  padding:12px 14px;border-bottom:1px solid var(--border);
+  color:var(--text2);vertical-align:middle;
+}
+.data-table tr:hover td{background:var(--surface2);}
+.action-btn{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;
+  padding:4px 10px;border:1px solid var(--border2);background:transparent;
+  color:var(--text);cursor:pointer;transition:all .2s;
+}
+.action-btn:hover{border-color:var(--accent);color:var(--accent);}
+.action-btn.danger:hover{border-color:var(--red);color:var(--red);}
+.status-dot{
+  width:6px;height:6px;border-radius:50%;display:inline-block;margin-right:6px;
+}
+.dot-pub{background:var(--green);}
+.dot-draft{background:var(--muted);}
+.add-btn{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;
+  padding:8px 20px;background:var(--accent);color:#000;border:none;
+  cursor:pointer;font-weight:600;margin-bottom:20px;
+}
+
+/* ── FOOTER ── */
+footer{
+  border-top:1px solid var(--border);background:var(--surface);
+  padding:40px 0 24px;margin-top:64px;
+}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+.footer-brand{font-family:'Syne',sans-serif;font-weight:800;font-size:22px;color:var(--heading);margin-bottom:12px;}
+.footer-brand span{color:var(--accent);}
+.footer-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+.footer-col-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--accent);margin-bottom:16px;}
+.footer-link{display:block;font-size:13px;color:var(--muted);margin-bottom:8px;cursor:pointer;transition:color .2s;}
+.footer-link:hover{color:var(--text2);}
+.footer-bottom{
+  border-top:1px solid var(--border);padding-top:20px;
+  display:flex;justify-content:space-between;align-items:center;
+  font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;
+}
+
+/* ── UTILS ── */
+.mt8{margin-top:8px;}
+.mt16{margin-top:16px;}
+.mt24{margin-top:24px;}
+.mt32{margin-top:32px;}
+.mt48{margin-top:48px;}
+.mb24{margin-bottom:24px;}
+.mb32{margin-bottom:32px;}
+.pb32{padding-bottom:32px;}
+.btn-ghost{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;
+  padding:8px 20px;border:1px solid var(--border2);background:transparent;
+  color:var(--text2);cursor:pointer;transition:all .2s;
+}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);}
+.divider{border:none;border-top:1px solid var(--border);margin:32px 0;}
+.live-dot{
+  width:6px;height:6px;border-radius:50%;background:var(--red);
+  display:inline-block;margin-right:6px;animation:pulse 1.5s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.8);}}
+.blink{animation:blink 1s step-end infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* Fade in */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
+.page.active .fade-in{animation:fadeUp .4s ease forwards;}
+.page.active .fade-in-2{animation:fadeUp .4s .1s ease both;}
+.page.active .fade-in-3{animation:fadeUp .4s .2s ease both;}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:4px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--border2);}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAVIGATION
+══════════════════════════════════════════ -->
+<nav>
+  <div class="nav-logo" onclick="goTo('home')">KASET<span>-</span>NEWS</div>
+  <div class="nav-links">
+    <div class="nav-link active" id="nav-home" onclick="goTo('home')">Home</div>
+    <div class="nav-link" id="nav-national" onclick="goTo('category','national')">National</div>
+    <div class="nav-link" id="nav-asean" onclick="goTo('category','asean')">ASEAN</div>
+    <div class="nav-link" id="nav-international" onclick="goTo('category','international')">International</div>
+    <div class="nav-link" id="nav-search" onclick="goTo('search')">Search</div>
+  </div>
+  <div class="nav-right">
+    <input class="nav-search" placeholder="// SEARCH..." onkeydown="if(event.key==='Enter')goTo('search')"/>
+    <button class="nav-btn" onclick="goTo('login')">Login</button>
+    <button class="nav-btn primary" onclick="goTo('register')">Register</button>
+    <button class="nav-btn" onclick="goTo('admin')" style="border-color:var(--muted);color:var(--muted);">Admin</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     PAGE 1 — HOMEPAGE
+══════════════════════════════════════════ -->
+<div class="page active" id="page-home">
+
+  <!-- Ticker -->
+  <div class="ticker">
+    <div class="ticker-label">⚡ LIVE</div>
+    <div class="ticker-track">
+      <span>Critical zero-day found in OpenSSH — patch immediately</span>
+      <span class="ticker-sep">///</span>
+      <span>Thai CERT issues warning on banking trojans</span>
+      <span class="ticker-sep">///</span>
+      <span>ASEAN cyber taskforce convenes emergency summit</span>
+      <span class="ticker-sep">///</span>
+      <span>Ransomware group RansomHub claims 40 new victims</span>
+      <span class="ticker-sep">///</span>
+      <span>Meta patches 3 critical WhatsApp vulnerabilities</span>
+      <span class="ticker-sep">///</span>
+      <span>Critical zero-day found in OpenSSH — patch immediately</span>
+      <span class="ticker-sep">///</span>
+      <span>Thai CERT issues warning on banking trojans</span>
+      <span class="ticker-sep">///</span>
+      <span>ASEAN cyber taskforce convenes emergency summit</span>
+      <span class="ticker-sep">///</span>
+      <span>Ransomware group RansomHub claims 40 new victims</span>
+      <span class="ticker-sep">///</span>
+      <span>Meta patches 3 critical WhatsApp vulnerabilities</span>
+    </div>
+  </div>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-inner fade-in">
+        <div>
+          <div class="hero-tag"><span class="tag tag-national">National</span></div>
+          <h1 class="hero-title">Thai Government Servers Hit by <span>Sophisticated APT</span> Campaign</h1>
+          <p class="hero-excerpt">A state-sponsored threat actor has breached multiple Thai Ministry networks in a coordinated intrusion spanning 14 weeks. NCSA confirms data exfiltration from at least three agencies.</p>
+          <div class="hero-meta">
+            <span class="live-dot"></span>BREAKING · 2 HOURS AGO · BY SIRIPORN K.
+          </div>
+          <button class="btn-ghost mt16" onclick="goTo('article')">READ FULL STORY →</button>
+        </div>
+        <div class="hero-img">// FEATURED IMAGE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- Top Stories -->
+    <div class="section-label fade-in-2">Top Stories</div>
+    <div class="grid-3 mb32 fade-in-2">
+      <div class="card" onclick="goTo('article')">
+        <div class="card-img-placeholder">// ARTICLE IMAGE</div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag tag-asean">ASEAN</span><span class="card-date">Mar 04, 2026</span></div>
+          <div class="card-title">Singapore MAS Fines DBS $2.1M Over Repeated Cybersecurity Failures</div>
+          <div class="card-excerpt">The Monetary Authority of Singapore levied its largest-ever cybersecurity penalty following a third system outage in 18 months.</div>
+        </div>
+      </div>
+      <div class="card" onclick="goTo('article')">
+        <div class="card-img-placeholder">// ARTICLE IMAGE</div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag tag-malware">Malware</span><span class="card-date">Mar 03, 2026</span></div>
+          <div class="card-title">FakeUpdate Campaign Deploys New AMOS Stealer Variant Across SEA</div>
+          <div class="card-excerpt">Researchers at Group-IB identified a new wave of browser update lures distributing an evolved AMOS stealer targeting macOS users across Southeast Asia.</div>
+        </div>
+      </div>
+      <div class="card" onclick="goTo('article')">
+        <div class="card-img-placeholder">// ARTICLE IMAGE</div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag tag-international">International</span><span class="card-date">Mar 03, 2026</span></div>
+          <div class="card-title">CISA Mandates Federal Agencies Patch Critical Ivanti Flaw Within 48 Hours</div>
+          <div class="card-excerpt">A directive issued Tuesday orders all US federal civilian agencies to address CVE-2026-1182, an actively exploited authentication bypass in Ivanti Connect Secure.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main + Sidebar -->
+    <div class="grid-main-side fade-in-3">
+      <div>
+        <div class="section-label">Latest News</div>
+
+        <div class="list-item" onclick="goTo('article')">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-breach">Data Breach</span><span class="card-date">Mar 04, 2026</span></div>
+            <div class="list-title">Kasetsart University Student Database Exposed — 180,000 Records Leaked on Dark Web Forum</div>
+            <div class="list-meta">NATIONAL · BY ARTHIT W.</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-asean">ASEAN</span><span class="card-date">Mar 04, 2026</span></div>
+            <div class="list-title">Vietnam's Ministry of Public Security Warns of AI-Powered Deepfake Scam Surge</div>
+            <div class="list-meta">ASEAN · BY NGUYEN T.H.</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-malware">Malware</span><span class="card-date">Mar 03, 2026</span></div>
+            <div class="list-title">BankBot Variant "DragonFin" Targets Thai Mobile Banking Apps with New Overlay Attack</div>
+            <div class="list-meta">NATIONAL · BY SIRIPORN K.</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-international">International</span><span class="card-date">Mar 03, 2026</span></div>
+            <div class="list-title">LockBit 4.0 Infrastructure Seized in Joint Europol-FBI Operation "Endgame II"</div>
+            <div class="list-meta">INTERNATIONAL · BY REUTERS WIRE</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-breach">Data Breach</span><span class="card-date">Mar 02, 2026</span></div>
+            <div class="list-title">Philippine SSS Suffers Second Data Breach in 6 Months — 3M Members Affected</div>
+            <div class="list-meta">ASEAN · BY MARIA S.</div>
+          </div>
+        </div>
+
+        <button class="btn-ghost mt24">LOAD MORE STORIES →</button>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="sidebar-widget">
+          <div class="widget-header">Categories</div>
+          <div class="widget-body">
+            <div class="cat-item" onclick="goTo('category','national')"><span>🇹🇭 National</span><span class="cat-count">42</span></div>
+            <div class="cat-item" onclick="goTo('category','asean')"><span>🌏 ASEAN</span><span class="cat-count">38</span></div>
+            <div class="cat-item" onclick="goTo('category','international')"><span>🌐 International</span><span class="cat-count">91</span></div>
+            <div class="cat-item"><span>🦠 Malware</span><span class="cat-count">67</span></div>
+            <div class="cat-item"><span>💾 Data Breach</span><span class="cat-count">54</span></div>
+            <div class="cat-item"><span>🔓 Vulnerabilities</span><span class="cat-count">83</span></div>
+            <div class="cat-item"><span>🏛 Policy & Law</span><span class="cat-count">29</span></div>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="widget-header">Trending Tags</div>
+          <div class="widget-body">
+            <div class="tag-cloud">
+              <div class="tag-cloud-item">APT</div>
+              <div class="tag-cloud-item">ransomware</div>
+              <div class="tag-cloud-item">CVE-2026</div>
+              <div class="tag-cloud-item">NCSA</div>
+              <div class="tag-cloud-item">phishing</div>
+              <div class="tag-cloud-item">zero-day</div>
+              <div class="tag-cloud-item">AI</div>
+              <div class="tag-cloud-item">PDPA</div>
+              <div class="tag-cloud-item">DDoS</div>
+              <div class="tag-cloud-item">darkweb</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="widget-header">Threat Level · Thailand</div>
+          <div class="widget-body">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:12px;letter-spacing:1px;">NCSA CURRENT STATUS</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--red);">HIGH</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1px;">Updated Mar 04, 2026 · 06:00 UTC</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+  </div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">KASET<span>-NEWS</span></div>
+          <div class="footer-desc">Thailand's leading cybersecurity news platform. Covering national, ASEAN, and international cyber threats for security professionals.</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Regions</div>
+          <div class="footer-link" onclick="goTo('category','national')">National</div>
+          <div class="footer-link" onclick="goTo('category','asean')">ASEAN</div>
+          <div class="footer-link" onclick="goTo('category','international')">International</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Topics</div>
+          <div class="footer-link">Malware</div>
+          <div class="footer-link">Data Breaches</div>
+          <div class="footer-link">Vulnerabilities</div>
+          <div class="footer-link">Policy & Law</div>
+        </div>
+        <div>
+          <div class="footer-col-title">Platform</div>
+          <div class="footer-link" onclick="goTo('login')">Login</div>
+          <div class="footer-link" onclick="goTo('register')">Register</div>
+          <div class="footer-link" onclick="goTo('admin')">Admin</div>
+          <div class="footer-link">About</div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 KASET-NEWS · ALL RIGHTS RESERVED</span>
+        <span>BUILT FOR CYBERSECURITY PROFESSIONALS<span class="blink"> _</span></span>
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 2 — CATEGORY PAGE
+══════════════════════════════════════════ -->
+<div class="page" id="page-category">
+  <div class="page-header">
+    <div class="container">
+      <div class="page-header-label" id="cat-breadcrumb">// KASET-NEWS / CATEGORY</div>
+      <h1 class="page-header-title fade-in" id="cat-title">National</h1>
+      <p class="page-header-sub fade-in-2" id="cat-desc">Cybersecurity news and incidents from Thailand.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="grid-main-side">
+      <div>
+        <div class="section-label fade-in">Latest in <span id="cat-label-inline">National</span></div>
+        <div class="grid-2 mb32 fade-in-2" id="cat-cards">
+          <!-- cards injected by JS -->
+        </div>
+        <div class="fade-in-3">
+          <div class="list-item" onclick="goTo('article')">
+            <div class="list-thumb">IMG</div>
+            <div>
+              <div class="list-title" id="cat-list-1">Thai Police Arrest 12 in SMS Phishing Syndicate Linked to Myanmar Scam Centres</div>
+              <div class="list-meta">Mar 02, 2026</div>
+            </div>
+          </div>
+          <div class="list-item" onclick="goTo('article')">
+            <div class="list-thumb">IMG</div>
+            <div>
+              <div class="list-title" id="cat-list-2">PDPA Office Launches Investigation into Health Data Leak at Major Thai Hospital Chain</div>
+              <div class="list-meta">Mar 01, 2026</div>
+            </div>
+          </div>
+          <div class="list-item" onclick="goTo('article')">
+            <div class="list-thumb">IMG</div>
+            <div>
+              <div class="list-title" id="cat-list-3">ETDA Proposes Mandatory Cybersecurity Certification for Critical Infrastructure Operators</div>
+              <div class="list-meta">Feb 28, 2026</div>
+            </div>
+          </div>
+          <div class="list-item" onclick="goTo('article')">
+            <div class="list-thumb">IMG</div>
+            <div>
+              <div class="list-title">Royal Thai Army Cyber Command Upgrades SOC with AI-Assisted Threat Detection</div>
+              <div class="list-meta">Feb 27, 2026</div>
+            </div>
+          </div>
+        </div>
+        <button class="btn-ghost mt24">LOAD MORE →</button>
+      </div>
+      <aside>
+        <div class="sidebar-widget">
+          <div class="widget-header">Other Regions</div>
+          <div class="widget-body">
+            <div class="cat-item" onclick="goTo('category','national')"><span>🇹🇭 National</span><span class="cat-count">42</span></div>
+            <div class="cat-item" onclick="goTo('category','asean')"><span>🌏 ASEAN</span><span class="cat-count">38</span></div>
+            <div class="cat-item" onclick="goTo('category','international')"><span>🌐 International</span><span class="cat-count">91</span></div>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="widget-header">Trending Tags</div>
+          <div class="widget-body">
+            <div class="tag-cloud">
+              <div class="tag-cloud-item">NCSA</div>
+              <div class="tag-cloud-item">PDPA</div>
+              <div class="tag-cloud-item">ETDA</div>
+              <div class="tag-cloud-item">APT</div>
+              <div class="tag-cloud-item">phishing</div>
+              <div class="tag-cloud-item">banking trojan</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 3 — ARTICLE DETAIL
+══════════════════════════════════════════ -->
+<div class="page" id="page-article">
+  <div class="container" style="padding-top:48px;">
+    <div class="grid-main-side">
+      <div>
+        <!-- Breadcrumb -->
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:20px;">
+          <span style="cursor:pointer;" onclick="goTo('home')">HOME</span> / <span style="cursor:pointer;" onclick="goTo('category','national')">NATIONAL</span> / ARTICLE
+        </div>
+
+        <!-- Tags + Title -->
+        <div class="fade-in">
+          <div class="card-meta mb24"><span class="tag tag-national">National</span><span class="tag tag-malware" style="margin-left:4px;">APT</span></div>
+          <h1 class="article-title">Thai Government Servers Hit by Sophisticated APT Campaign Spanning 14 Weeks</h1>
+          <div class="article-meta-bar">
+            <span>BY <strong>SIRIPORN KITTISAK</strong></span>
+            <span>Mar 04, 2026</span>
+            <span>7 MIN READ</span>
+            <span><span class="live-dot"></span>BREAKING</span>
+          </div>
+        </div>
+
+        <!-- Featured image -->
+        <div class="article-featured-img fade-in-2">// FEATURED IMAGE · 16:7 RATIO</div>
+
+        <!-- Article body -->
+        <div class="article-body fade-in-3">
+          <p class="lead">A state-sponsored threat actor assessed with high confidence to operate from a nation-state adversary has successfully breached multiple Thai Ministry networks in a coordinated intrusion campaign that security researchers say is among the most sophisticated ever observed targeting Thailand's public sector.</p>
+
+          <p>The National Cyber Security Agency (NCSA) confirmed the breach on Wednesday morning, stating that at least three government agencies were compromised and that forensic analysis is ongoing. The intrusion, internally codenamed "Operation GoldenTeak" by responding analysts, is believed to have begun in mid-January 2026.</p>
+
+          <p>Initial access was gained through a spear-phishing campaign targeting mid-level civil servants, according to two sources familiar with the investigation who spoke on condition of anonymity. The lure emails impersonated official communications from the Digital Economy and Society Ministry.</p>
+
+          <h2>Tactics, Techniques & Procedures</h2>
+
+          <p>Once inside, the threat actor deployed a previously undocumented implant researchers are calling "BambooRAT." The malware uses encrypted DNS-over-HTTPS channels for command and control, making detection with traditional network monitoring tools extremely difficult.</p>
+
+          <div class="blockquote">"This is a patient, well-resourced adversary. The dwell time of 14 weeks before discovery is a serious indicator of their operational sophistication." — Anonymous NCSA Senior Analyst</div>
+
+          <p>The attackers conducted extensive lateral movement using living-off-the-land techniques, leveraging native Windows tools to avoid triggering security alerts. Data exfiltration was conducted in small encrypted batches over a six-week window.</p>
+
+          <h2>What Was Taken</h2>
+
+          <p>NCSA has not disclosed the specific nature of the exfiltrated data, citing national security concerns. However, sources indicate that personnel records and inter-ministerial communications are among the data categories believed to have been accessed.</p>
+
+          <p>Remediation efforts are underway and the affected systems have been isolated. The Thai government is working with international cybersecurity partners and has notified INTERPOL's Cybercrime Directorate.</p>
+        </div>
+
+        <div class="divider"></div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:12px;">TAGS</div>
+        <div class="tag-cloud">
+          <div class="tag-cloud-item">APT</div>
+          <div class="tag-cloud-item">NCSA</div>
+          <div class="tag-cloud-item">espionage</div>
+          <div class="tag-cloud-item">malware</div>
+          <div class="tag-cloud-item">Thailand</div>
+          <div class="tag-cloud-item">government</div>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside style="padding-top:8px;">
+        <div class="sidebar-widget">
+          <div class="widget-header">Related Articles</div>
+          <div class="widget-body">
+            <div class="list-item" style="grid-template-columns:50px 1fr;" onclick="goTo('article')">
+              <div class="list-thumb">IMG</div>
+              <div><div class="list-title" style="font-size:12px;">NCSA Issues Emergency Directive Following Ministry Breach</div><div class="list-meta">Mar 04</div></div>
+            </div>
+            <div class="list-item" style="grid-template-columns:50px 1fr;" onclick="goTo('article')">
+              <div class="list-thumb">IMG</div>
+              <div><div class="list-title" style="font-size:12px;">BambooRAT Malware Analysis: Full Technical Report</div><div class="list-meta">Mar 03</div></div>
+            </div>
+            <div class="list-item" style="grid-template-columns:50px 1fr;" onclick="goTo('article')">
+              <div class="list-thumb">IMG</div>
+              <div><div class="list-title" style="font-size:12px;">Thailand's PDPA Faces First Major Stress Test</div><div class="list-meta">Mar 02</div></div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="widget-header">Threat Intel</div>
+          <div class="widget-body">
+            <div style="font-size:12px;color:var(--muted);line-height:1.8;font-family:'JetBrains Mono',monospace;">
+              <div>Threat Actor: <span style="color:var(--red);">UNKNOWN APT</span></div>
+              <div>Origin: <span style="color:var(--text2);">Attributed (NDA)</span></div>
+              <div>Malware: <span style="color:var(--text2);">BambooRAT</span></div>
+              <div>CVE: <span style="color:var(--text2);">None (0-day)</span></div>
+              <div>Severity: <span style="color:var(--red);">CRITICAL</span></div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </div>
+
+    <!-- Related Stories -->
+    <div class="divider"></div>
+    <div class="section-label">More from National</div>
+    <div class="grid-3 mb32">
+      <div class="card" onclick="goTo('article')">
+        <div class="card-img-placeholder">// IMAGE</div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag tag-national">National</span><span class="card-date">Mar 03</span></div>
+          <div class="card-title">DragonFin Banking Trojan Targets SCB, KBank Mobile Apps</div>
+        </div>
+      </div>
+      <div class="card" onclick="goTo('article')">
+        <div class="card-img-placeholder">// IMAGE</div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag tag-breach">Data Breach</span><span class="card-date">Mar 03</span></div>
+          <div class="card-title">University Student Database Leaked: 180K Records on Dark Web</div>
+        </div>
+      </div>
+      <div class="card" onclick="goTo('article')">
+        <div class="card-img-placeholder">// IMAGE</div>
+        <div class="card-body">
+          <div class="card-meta"><span class="tag tag-national">National</span><span class="card-date">Mar 02</span></div>
+          <div class="card-title">12 Arrested in SMS Phishing Syndicate Connected to Myanmar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 4 — SEARCH
+══════════════════════════════════════════ -->
+<div class="page" id="page-search">
+  <div class="page-header">
+    <div class="container">
+      <div class="page-header-label">// KASET-NEWS / SEARCH</div>
+      <h1 class="page-header-title fade-in">Search Articles</h1>
+      <p class="page-header-sub fade-in-2">Search across national, ASEAN, and international cyber news.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="search-bar-big fade-in">
+      <input class="search-input-big" placeholder="e.g. ransomware, APT, CVE-2026..." id="search-input-big" value="ransomware"/>
+      <button class="search-btn-big">SEARCH</button>
+    </div>
+    <div class="filter-chips fade-in-2">
+      <div class="chip active">All</div>
+      <div class="chip">🇹🇭 National</div>
+      <div class="chip">🌏 ASEAN</div>
+      <div class="chip">🌐 International</div>
+      <div class="chip">Malware</div>
+      <div class="chip">Data Breach</div>
+      <div class="chip">Vulnerability</div>
+      <div class="chip">Policy</div>
+    </div>
+    <div class="search-results-count fade-in-3">SHOWING 6 RESULTS FOR "RANSOMWARE"</div>
+
+    <div class="grid-main-side fade-in-3">
+      <div>
+        <div class="list-item" onclick="goTo('article')" style="grid-template-columns:90px 1fr;">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-international">International</span><span class="card-date">Mar 04, 2026</span></div>
+            <div class="list-title">LockBit 4.0 Infrastructure Seized in Joint Europol-FBI Operation "Endgame II"</div>
+            <div class="card-excerpt" style="font-size:13px;margin-top:4px;">International law enforcement dismantled the core LockBit 4.0 ransomware-as-a-service platform in a coordinated takedown involving 14 countries.</div>
+            <div class="list-meta" style="margin-top:6px;">INTERNATIONAL · 7 MIN READ</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')" style="grid-template-columns:90px 1fr;">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-national">National</span><span class="card-date">Mar 02, 2026</span></div>
+            <div class="list-title">Thai Hospital Network Recovers After Ransomware Attack Disrupts Patient Records</div>
+            <div class="card-excerpt" style="font-size:13px;margin-top:4px;">A ransomware attack on a private hospital group in Bangkok encrypted patient management systems for 72 hours, affecting nearly 8,000 patients.</div>
+            <div class="list-meta" style="margin-top:6px;">NATIONAL · 5 MIN READ</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')" style="grid-template-columns:90px 1fr;">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-asean">ASEAN</span><span class="card-date">Feb 28, 2026</span></div>
+            <div class="list-title">Indonesia's BSSN Reports 40% Rise in Ransomware Incidents in Q1 2026</div>
+            <div class="card-excerpt" style="font-size:13px;margin-top:4px;">Indonesia's national cyber agency released its quarterly threat report showing a sharp increase in ransomware targeting SMEs and government contractors.</div>
+            <div class="list-meta" style="margin-top:6px;">ASEAN · 4 MIN READ</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')" style="grid-template-columns:90px 1fr;">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-malware">Malware</span><span class="card-date">Feb 27, 2026</span></div>
+            <div class="list-title">RansomHub Group Adds Encryption-as-a-Service Feature to Affiliate Platform</div>
+            <div class="card-excerpt" style="font-size:13px;margin-top:4px;">The prolific RansomHub ransomware group has expanded its affiliate platform with new tools lowering the technical barrier for attacks.</div>
+            <div class="list-meta" style="margin-top:6px;">MALWARE · 6 MIN READ</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')" style="grid-template-columns:90px 1fr;">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-international">International</span><span class="card-date">Feb 25, 2026</span></div>
+            <div class="list-title">CISA & Partners Release Joint Advisory on ALPHV BlackCat Ransomware Resurgence</div>
+            <div class="list-meta" style="margin-top:6px;">INTERNATIONAL · 5 MIN READ</div>
+          </div>
+        </div>
+        <div class="list-item" onclick="goTo('article')" style="grid-template-columns:90px 1fr;">
+          <div class="list-thumb">IMG</div>
+          <div>
+            <div class="card-meta"><span class="tag tag-asean">ASEAN</span><span class="card-date">Feb 24, 2026</span></div>
+            <div class="list-title">Malaysian Critical Infrastructure Hit by DragonForce Ransomware — Ports Disrupted</div>
+            <div class="list-meta" style="margin-top:6px;">ASEAN · 8 MIN READ</div>
+          </div>
+        </div>
+        <button class="btn-ghost mt24">LOAD MORE RESULTS →</button>
+      </div>
+
+      <aside>
+        <div class="sidebar-widget">
+          <div class="widget-header">Popular Searches</div>
+          <div class="widget-body">
+            <div class="tag-cloud">
+              <div class="tag-cloud-item">APT</div>
+              <div class="tag-cloud-item">zero-day</div>
+              <div class="tag-cloud-item">phishing</div>
+              <div class="tag-cloud-item">NCSA</div>
+              <div class="tag-cloud-item">CVE-2026</div>
+              <div class="tag-cloud-item">LockBit</div>
+              <div class="tag-cloud-item">deepfake</div>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="widget-header">Search Tips</div>
+          <div class="widget-body" style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);line-height:2;letter-spacing:0.5px;">
+            <div>· Use CVE numbers for vulnerability search</div>
+            <div>· Filter by region with the chips above</div>
+            <div>· Search for threat actor names</div>
+            <div>· Try malware family names</div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 5a — LOGIN
+══════════════════════════════════════════ -->
+<div class="page" id="page-login">
+  <div class="auth-wrap">
+    <div class="auth-box fade-in">
+      <div class="auth-logo">KASET<span>-NEWS</span></div>
+      <div class="auth-sub">// SIGN IN TO YOUR ACCOUNT</div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="analyst@kasetnews.th"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" placeholder="••••••••"/>
+      </div>
+      <div style="display:flex;justify-content:flex-end;margin-bottom:20px;">
+        <span style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);cursor:pointer;letter-spacing:1px;">FORGOT PASSWORD?</span>
+      </div>
+      <button class="form-btn">SIGN IN →</button>
+      <hr class="auth-divider"/>
+      <div class="auth-footer">
+        NO ACCOUNT? <a onclick="goTo('register')">REGISTER HERE</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 5b — REGISTER
+══════════════════════════════════════════ -->
+<div class="page" id="page-register">
+  <div class="auth-wrap">
+    <div class="auth-box fade-in">
+      <div class="auth-logo">KASET<span>-NEWS</span></div>
+      <div class="auth-sub">// CREATE YOUR ACCOUNT</div>
+      <div class="form-group">
+        <label class="form-label">Username</label>
+        <input class="form-input" type="text" placeholder="cyber_analyst_01"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input class="form-input" type="email" placeholder="you@domain.com"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Password</label>
+        <input class="form-input" type="password" placeholder="Min. 8 characters"/>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Confirm Password</label>
+        <input class="form-input" type="password" placeholder="Repeat password"/>
+      </div>
+      <button class="form-btn">CREATE ACCOUNT →</button>
+      <hr class="auth-divider"/>
+      <div class="auth-footer">
+        ALREADY REGISTERED? <a onclick="goTo('login')">SIGN IN</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     PAGE 6 — ADMIN DASHBOARD
+══════════════════════════════════════════ -->
+<div class="page" id="page-admin">
+  <div class="admin-layout">
+    <!-- Admin Sidebar -->
+    <div class="admin-sidebar">
+      <div style="padding:16px 20px 24px;border-bottom:1px solid var(--border);margin-bottom:8px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:4px;">LOGGED IN AS</div>
+        <div style="font-family:'Syne',sans-serif;font-weight:700;color:var(--heading);font-size:14px;">admin@kasetnews.th</div>
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--accent);letter-spacing:1px;margin-top:2px;">ADMINISTRATOR</div>
+      </div>
+      <div class="admin-nav-item active" id="admin-nav-overview"><span class="admin-icon">◈</span> Overview</div>
+      <div class="admin-nav-item" id="admin-nav-articles" onclick="switchAdminTab('articles')"><span class="admin-icon">◧</span> Articles</div>
+      <div class="admin-nav-item" id="admin-nav-users" onclick="switchAdminTab('users')"><span class="admin-icon">◉</span> Users</div>
+      <div class="admin-nav-item"><span class="admin-icon">⬡</span> Categories</div>
+      <div class="admin-nav-item"><span class="admin-icon">◇</span> Tags</div>
+      <div style="margin-top:auto;padding:20px;border-top:1px solid var(--border);margin-top:40px;">
+        <div class="admin-nav-item" style="padding:0;" onclick="goTo('home')"><span class="admin-icon">←</span> Back to Site</div>
+      </div>
+    </div>
+
+    <!-- Admin Main -->
+    <div class="admin-main">
+
+      <!-- Overview Tab -->
+      <div id="admin-tab-overview">
+        <div class="admin-header fade-in">
+          <div class="admin-title">Dashboard Overview</div>
+          <div class="admin-sub">// KASET-NEWS ADMIN · MARCH 04, 2026</div>
+        </div>
+        <div class="stats-grid fade-in-2">
+          <div class="stat-card">
+            <div class="stat-num">247</div>
+            <div class="stat-label">Total Articles</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" style="color:var(--green);">1,824</div>
+            <div class="stat-label">Registered Users</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" style="color:var(--yellow);">18</div>
+            <div class="stat-label">Drafts Pending</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num" style="color:var(--red);">42K</div>
+            <div class="stat-label">Monthly Visitors</div>
+          </div>
+        </div>
+
+        <div class="section-label fade-in-3">Recent Activity</div>
+        <table class="data-table fade-in-3">
+          <thead>
+            <tr><th>Time</th><th>Action</th><th>User</th><th>Details</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>06:14</td><td><span style="color:var(--green);">PUBLISHED</span></td><td>siriporn_k</td><td>Thai Government APT Attack Article</td></tr>
+            <tr><td>05:50</td><td><span style="color:var(--yellow);">DRAFT SAVED</span></td><td>arthit_w</td><td>University Data Breach Follow-up</td></tr>
+            <tr><td>04:22</td><td><span style="color:var(--accent);">REGISTERED</span></td><td>new_user_8821</td><td>User registration via email</td></tr>
+            <tr><td>03:10</td><td><span style="color:var(--red);">LOGIN FAIL</span></td><td>unknown</td><td>5 failed attempts · IP: 192.168.x.x</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Articles Tab -->
+      <div id="admin-tab-articles" style="display:none;">
+        <div class="admin-header fade-in">
+          <div class="admin-title">Manage Articles</div>
+          <div class="admin-sub">// 247 TOTAL · 229 PUBLISHED · 18 DRAFT</div>
+        </div>
+        <button class="add-btn fade-in">+ NEW ARTICLE</button>
+        <table class="data-table fade-in-2">
+          <thead>
+            <tr><th>Status</th><th>Title</th><th>Category</th><th>Author</th><th>Date</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="status-dot dot-pub"></span>Published</td>
+              <td style="max-width:280px;">Thai Government Servers Hit by Sophisticated APT Campaign</td>
+              <td><span class="tag tag-national" style="font-size:9px;">National</span></td>
+              <td>siriporn_k</td>
+              <td>Mar 04</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td><span class="status-dot dot-pub"></span>Published</td>
+              <td style="max-width:280px;">Singapore MAS Fines DBS $2.1M Over Cybersecurity Failures</td>
+              <td><span class="tag tag-asean" style="font-size:9px;">ASEAN</span></td>
+              <td>admin</td>
+              <td>Mar 04</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td><span class="status-dot dot-pub"></span>Published</td>
+              <td style="max-width:280px;">FakeUpdate Campaign Deploys AMOS Stealer Variant</td>
+              <td><span class="tag tag-malware" style="font-size:9px;">Malware</span></td>
+              <td>arthit_w</td>
+              <td>Mar 03</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td><span class="status-dot dot-draft"></span>Draft</td>
+              <td style="max-width:280px;">BambooRAT Full Technical Analysis — IOC Report</td>
+              <td><span class="tag tag-malware" style="font-size:9px;">Malware</span></td>
+              <td>siriporn_k</td>
+              <td>Mar 03</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Delete</button></td>
+            </tr>
+            <tr>
+              <td><span class="status-dot dot-draft"></span>Draft</td>
+              <td style="max-width:280px;">University Data Breach: PDPA Implications Explained</td>
+              <td><span class="tag tag-national" style="font-size:9px;">National</span></td>
+              <td>arthit_w</td>
+              <td>Mar 03</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Delete</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Users Tab -->
+      <div id="admin-tab-users" style="display:none;">
+        <div class="admin-header fade-in">
+          <div class="admin-title">Manage Users</div>
+          <div class="admin-sub">// 1,824 REGISTERED · 3 ADMINS · 1,821 USERS</div>
+        </div>
+        <table class="data-table fade-in-2">
+          <thead>
+            <tr><th>Username</th><th>Email</th><th>Role</th><th>Joined</th><th>Actions</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong style="color:var(--heading);">admin</strong></td>
+              <td>admin@kasetnews.th</td>
+              <td><span class="tag tag-malware" style="font-size:9px;">ADMIN</span></td>
+              <td>Jan 01, 2026</td>
+              <td><button class="action-btn">Edit</button></td>
+            </tr>
+            <tr>
+              <td>siriporn_k</td>
+              <td>siriporn@kasetnews.th</td>
+              <td><span class="tag tag-malware" style="font-size:9px;">ADMIN</span></td>
+              <td>Jan 01, 2026</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Remove</button></td>
+            </tr>
+            <tr>
+              <td>arthit_w</td>
+              <td>arthit@kasetnews.th</td>
+              <td><span class="tag tag-malware" style="font-size:9px;">ADMIN</span></td>
+              <td>Jan 05, 2026</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Remove</button></td>
+            </tr>
+            <tr>
+              <td>cyber_analyst_88</td>
+              <td>analyst88@gmail.com</td>
+              <td><span class="tag tag-national" style="font-size:9px;">USER</span></td>
+              <td>Feb 12, 2026</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Ban</button></td>
+            </tr>
+            <tr>
+              <td>sec_watch_th</td>
+              <td>secwatch@proton.me</td>
+              <td><span class="tag tag-national" style="font-size:9px;">USER</span></td>
+              <td>Feb 20, 2026</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Ban</button></td>
+            </tr>
+            <tr>
+              <td>new_user_8821</td>
+              <td>user8821@gmail.com</td>
+              <td><span class="tag tag-national" style="font-size:9px;">USER</span></td>
+              <td>Mar 04, 2026</td>
+              <td><button class="action-btn">Edit</button> <button class="action-btn danger">Ban</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+// ── DATA ──
+const catData = {
+  national: {
+    title: 'National',
+    label: 'National',
+    desc: 'Cybersecurity news, incidents, and policy from Thailand.',
+    breadcrumb: '// KASET-NEWS / NATIONAL',
+    cards: [
+      { tag: 'national', tagLabel: 'National', date: 'Mar 04, 2026', title: 'Thai Government Servers Hit by Sophisticated APT Campaign', excerpt: 'A state-sponsored threat actor breached multiple Ministry networks across a 14-week intrusion campaign.' },
+      { tag: 'breach', tagLabel: 'Data Breach', date: 'Mar 04, 2026', title: 'Kasetsart University: 180K Student Records Leaked on Dark Web', excerpt: 'Personal data including ID numbers and contact details of current and former students have surfaced on a hacking forum.' },
+    ],
+    list: ['Thai Police Arrest 12 in SMS Phishing Syndicate Linked to Myanmar Scam Centres','PDPA Office Launches Investigation into Health Data Leak at Major Thai Hospital Chain','ETDA Proposes Mandatory Cybersecurity Certification for Critical Infrastructure Operators']
+  },
+  asean: {
+    title: 'ASEAN',
+    label: 'ASEAN',
+    desc: 'Cyber threats, policy, and incidents across Southeast Asia.',
+    breadcrumb: '// KASET-NEWS / ASEAN',
+    cards: [
+      { tag: 'asean', tagLabel: 'ASEAN', date: 'Mar 04, 2026', title: 'Singapore MAS Fines DBS $2.1M Over Repeated Cybersecurity Failures', excerpt: "The Monetary Authority of Singapore issued its largest-ever cyber penalty following the bank's third major outage in 18 months." },
+      { tag: 'asean', tagLabel: 'ASEAN', date: 'Mar 03, 2026', title: 'Vietnam MPS Warns of AI-Powered Deepfake Scam Surge Targeting Citizens', excerpt: 'Vietnam\'s Ministry of Public Security documented 3,200 deepfake fraud cases in Q1 2026, a 140% year-on-year increase.' },
+    ],
+    list: ['Indonesia BSSN Reports 40% Rise in Ransomware in Q1 2026','Malaysian Ports Disrupted by DragonForce Ransomware Attack','Philippine SSS Suffers Second Data Breach in 6 Months — 3M Affected']
+  },
+  international: {
+    title: 'International',
+    label: 'International',
+    desc: 'Global cybersecurity news from around the world.',
+    breadcrumb: '// KASET-NEWS / INTERNATIONAL',
+    cards: [
+      { tag: 'international', tagLabel: 'International', date: 'Mar 03, 2026', title: 'CISA Mandates Federal Agencies Patch Critical Ivanti Flaw Within 48 Hours', excerpt: 'An emergency directive orders all US federal civilian agencies to address CVE-2026-1182, an actively exploited authentication bypass.' },
+      { tag: 'malware', tagLabel: 'Malware', date: 'Mar 03, 2026', title: "LockBit 4.0 Infrastructure Seized in Joint Europol-FBI 'Endgame II' Operation", excerpt: 'A coordinated law enforcement action involving 14 countries dismantled the core infrastructure of the most prolific ransomware group.' },
+    ],
+    list: ['CISA & Partners Release Advisory on ALPHV BlackCat Ransomware Resurgence','NSA Warns of Volt Typhoon Pre-Positioning in US Critical Infrastructure','EU NIS2 Directive Enforcement Begins — Thousands of Companies Face Audits']
+  }
+};
+
+// ── NAVIGATION ──
+let currentPage = 'home';
+let currentCat = 'national';
+
+function goTo(page, cat) {
+  // Hide all pages
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  // Reset nav
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+
+  if (page === 'home') {
+    document.getElementById('page-home').classList.add('active');
+    document.getElementById('nav-home').classList.add('active');
+  } else if (page === 'category') {
+    currentCat = cat || 'national';
+    renderCategory(currentCat);
+    document.getElementById('page-category').classList.add('active');
+    if (cat === 'national') document.getElementById('nav-national').classList.add('active');
+    else if (cat === 'asean') document.getElementById('nav-asean').classList.add('active');
+    else if (cat === 'international') document.getElementById('nav-international').classList.add('active');
+  } else if (page === 'article') {
+    document.getElementById('page-article').classList.add('active');
+  } else if (page === 'search') {
+    document.getElementById('page-search').classList.add('active');
+    document.getElementById('nav-search').classList.add('active');
+  } else if (page === 'login') {
+    document.getElementById('page-login').classList.add('active');
+  } else if (page === 'register') {
+    document.getElementById('page-register').classList.add('active');
+  } else if (page === 'admin') {
+    document.getElementById('page-admin').classList.add('active');
+    switchAdminTab('overview');
+  }
+
+  window.scrollTo(0, 0);
+}
+
+function renderCategory(cat) {
+  const d = catData[cat];
+  document.getElementById('cat-title').textContent = d.title;
+  document.getElementById('cat-desc').textContent = d.desc;
+  document.getElementById('cat-breadcrumb').textContent = d.breadcrumb;
+  document.getElementById('cat-label-inline').textContent = d.label;
+
+  const tagMap = { national:'tag-national', asean:'tag-asean', international:'tag-international', malware:'tag-malware', breach:'tag-breach' };
+  const tagLabels = { national:'National', asean:'ASEAN', international:'International', malware:'Malware', breach:'Data Breach' };
+
+  const cardsEl = document.getElementById('cat-cards');
+  cardsEl.innerHTML = d.cards.map(c => `
+    <div class="card" onclick="goTo('article')">
+      <div class="card-img-placeholder">// ARTICLE IMAGE</div>
+      <div class="card-body">
+        <div class="card-meta"><span class="tag ${tagMap[c.tag]}">${c.tagLabel}</span><span class="card-date">${c.date}</span></div>
+        <div class="card-title">${c.title}</div>
+        <div class="card-excerpt">${c.excerpt}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function switchAdminTab(tab) {
+  ['overview','articles','users'].forEach(t => {
+    document.getElementById('admin-tab-' + t).style.display = 'none';
+    document.getElementById('admin-nav-' + t) && document.getElementById('admin-nav-' + t).classList.remove('active');
+  });
+  document.getElementById('admin-tab-' + tab).style.display = 'block';
+  document.getElementById('admin-nav-' + tab) && document.getElementById('admin-nav-' + tab).classList.add('active');
+}
+
+// Admin sidebar items that switch tabs
+document.getElementById('admin-nav-overview').onclick = () => switchAdminTab('overview');
+
+// Chips toggle
+document.querySelectorAll('.chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+  });
+});
+</script>
+</body>
+</html>
