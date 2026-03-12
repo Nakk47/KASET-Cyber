@@ -1,118 +1,146 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>KASET Reporter</title>
+  <head>
+    <meta charset="UTF-8" />
+    <title>KASET Reporter</title>
 
-<script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
 
-</head>
+  <body class="bg-[#060b12] text-gray-200">
+    <!-- NAVBAR -->
+    <div
+      class="flex justify-between items-center bg-[#0a111c] border-b border-gray-800 px-8 h-[60px]"
+    >
+      <div class="text-xl font-bold tracking-widest">KASET-NEWS</div>
 
-<body class="bg-[#060b12] text-gray-200">
-
-<!-- NAVBAR -->
-<div class="flex justify-between items-center bg-[#0a111c] border-b border-gray-800 px-8 h-[60px]">
-    
-    <div class="text-xl font-bold tracking-widest">
-        KASET-NEWS
+      <div class="space-x-3">
+        <button class="border border-blue-400 px-3 py-1 text-blue-300">
+          Login
+        </button>
+        <button class="border border-blue-400 px-3 py-1 text-blue-300">
+          Register
+        </button>
+        <button class="border border-blue-400 px-3 py-1 text-blue-300">
+          Admin
+        </button>
+      </div>
     </div>
 
-    <div class="space-x-3">
-        <button class="border border-blue-400 px-3 py-1 text-blue-300">Login</button>
-        <button class="border border-blue-400 px-3 py-1 text-blue-300">Register</button>
-        <button class="border border-blue-400 px-3 py-1 text-blue-300">Admin</button>
+    <div class="flex">
+      <!-- SIDEBAR -->
+
+      <div
+        class="w-[220px] h-screen bg-[#070d17] border-r border-gray-800 pt-6"
+      >
+        <a
+          class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]"
+          href="#"
+        >
+          Overview
+        </a>
+
+        <a
+          class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]"
+          href="#"
+        >
+          Articles
+        </a>
+
+        <a
+          class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]"
+          href="#"
+        >
+          Users
+        </a>
+
+        <a
+          class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]"
+          href="#"
+        >
+          Categories
+        </a>
+
+        <a
+          class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]"
+          href="#"
+        >
+          Tags
+        </a>
+      </div>
+
+      <!-- MAIN CONTENT -->
+
+      <div class="flex-1 p-10">
+        <h1 class="text-3xl font-bold mb-8">Write New Article</h1>
+
+        <div class="bg-[#0a111c] border border-gray-800 p-8 max-w-[700px]">
+          <form class="space-y-4" for="/" method="post">
+            <div>
+              <label class="block text-sm text-gray-400 mb-1"
+                >Article Title</label
+              >
+              <input
+                name="art-title"
+                class="w-full bg-[#050a12] border border-gray-700 p-2"
+                type="text"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm text-gray-400 mb-1">Category</label>
+              <select
+                class="w-full bg-[#050a12] border border-gray-700 p-2"
+                name="category"
+              >
+                <option>Cyber Attack</option>
+                <option>Data Breach</option>
+                <option>Malware</option>
+                <option>Cybersecurity</option>
+                <option>Technology</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-sm text-gray-400 mb-1"
+                >Upload Image</label
+              >
+              <input
+                name="image"
+                class="w-full bg-[#050a12] border border-gray-700 p-2"
+                type="file"
+              />
+            </div>
+
+            <div>
+              <label class="block text-sm text-gray-400 mb-1"
+                >Article Content</label
+              >
+              <textarea
+                class="w-full bg-[#050a12] border border-gray-700 p-2 h-[200px]"
+              ></textarea>
+            </div>
+            <div>
+              <label class="block text-sm text-gray-400 mb-1">Tags</label>
+              <input
+                name="tags"
+                class="w-full bg-[#050a12] border border-gray-700 p-2"
+                type="text"
+              />
+            </div>
+
+            <div class="pt-4 space-x-3">
+              <button class="bg-green-500 text-black px-5 py-2 font-bold">
+                Publish
+              </button>
+
+              <button class="bg-yellow-400 text-black px-5 py-2 font-bold">
+                Save Draft
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
-
-</div>
-
-<div class="flex">
-
-<!-- SIDEBAR -->
-
-<div class="w-[220px] h-screen bg-[#070d17] border-r border-gray-800 pt-6">
-
-    <a class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]" href="#">
-        Overview
-    </a>
-
-    <a class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]" href="#">
-        Articles
-    </a>
-
-    <a class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]" href="#">
-        Users
-    </a>
-
-    <a class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]" href="#">
-        Categories
-    </a>
-
-    <a class="block px-6 py-3 text-gray-400 hover:text-cyan-400 hover:bg-[#0e1826]" href="#">
-        Tags
-    </a>
-
-</div>
-
-<!-- MAIN CONTENT -->
-
-<div class="flex-1 p-10">
-
-<h1 class="text-3xl font-bold mb-8">Write New Article</h1>
-
-<div class="bg-[#0a111c] border border-gray-800 p-8 max-w-[700px]">
-
-<form class="space-y-4">
-
-<div>
-<label class="block text-sm text-gray-400 mb-1">Article Title</label>
-<input class="w-full bg-[#050a12] border border-gray-700 p-2" type="text">
-</div>
-
-<div>
-<label class="block text-sm text-gray-400 mb-1">Category</label>
-<select class="w-full bg-[#050a12] border border-gray-700 p-2">
-<option>Cyber Attack</option>
-<option>Data Breach</option>
-<option>Malware</option>
-<option>Cybersecurity</option>
-<option>Technology</option>
-</select>
-</div>
-
-<div>
-<label class="block text-sm text-gray-400 mb-1">Upload Image</label>
-<input class="w-full bg-[#050a12] border border-gray-700 p-2" type="file">
-</div>
-
-<div>
-<label class="block text-sm text-gray-400 mb-1">Article Content</label>
-<textarea class="w-full bg-[#050a12] border border-gray-700 p-2 h-[200px]"></textarea>
-</div>
-
-<div>
-<label class="block text-sm text-gray-400 mb-1">Tags</label>
-<input class="w-full bg-[#050a12] border border-gray-700 p-2" type="text">
-</div>
-
-<div class="pt-4 space-x-3">
-
-<button class="bg-green-500 text-black px-5 py-2 font-bold">
-Publish
-</button>
-
-<button class="bg-yellow-400 text-black px-5 py-2 font-bold">
-Save Draft
-</button>
-
-</div>
-
-</form>
-
-</div>
-
-</div>
-
-</div>
-
-</body>
+  </body>
 </html>
