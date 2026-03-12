@@ -17,6 +17,16 @@
     "express": "^5.2.1",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.19.0",
-    "mysql2": "^3.18.2"
-  }
+    "mysql2": "^3.18.2",
+    "nodemon": "^3.1.14"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nakk47/KASET-Cyber.git"
+  },
+  "keywords": [],
+  "bugs": {
+    "url": "https://github.com/Nakk47/KASET-Cyber/issues"
+  },
+  "homepage": "https://github.com/Nakk47/KASET-Cyber#readme"
 }
