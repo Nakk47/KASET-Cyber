@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Kaset-News · Cyber Intelligence</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400;500&family=Bitter:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    /* Copy all your CSS from the first file here */
+    *{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --bg:#05070a;
+      --surface:#080b10;
+      --surface2:#0d1017;
+      --border:#161e28;
+      --border2:#1e2a38;
+      --accent:#00d4ff;
+      --accent-dim:rgba(0,212,255,0.12);
+      --red:#ff3c5e;
+      --red-dim:rgba(255,60,94,0.12);
+      --green:#00e676;
+      --yellow:#ffd740;
+      --text:#9ab0c8;
+      --text2:#c8daea;
+      --heading:#e8f4ff;
+      --muted:#3a4f65;
+      --nav-h:56px;
+    }
+    /* ... rest of your CSS ... */
+  </style>
+</head>
+<body>
+
+  <%- include('partials/header') %>
+  <%- include('partials/ticker') %>
+
+  <!-- Hero -->
+  <div class="hero">
+    <div class="container">
+      <div class="hero-inner fade-in">
+        <div>
+          <div class="hero-tag"><span class="tag tag-national">National</span></div>
+          <h1 class="hero-title"><%= hero.title %> <span><%= hero.highlight %></span></h1>
+          <p class="hero-excerpt"><%= hero.excerpt %></p>
+          <div class="hero-meta">
+            <span class="live-dot"></span><%= hero.meta %>
+          </div>
+          <button class="btn-ghost mt16" onclick="location.href='/article/<%= hero.articleId %>'">READ FULL STORY →</button>
+        </div>
+        <div class="hero-img">// FEATURED IMAGE</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <!-- Top Stories -->
+    <div class="section-label fade-in-2">Top Stories</div>
+    <div class="grid-3 mb32 fade-in-2">
+      <% topStories.forEach(story => { %>
+        <div class="card" onclick="location.href='/article/<%= story.id %>'">
+          <div class="card-img-placeholder">// ARTICLE IMAGE</div>
+          <div class="card-body">
+            <div class="card-meta"><span class="tag tag-<%= story.category %>"><%= story.categoryLabel %></span><span class="card-date"><%= story.date %></span></div>
+            <div class="card-title"><%= story.title %></div>
+            <div class="card-excerpt"><%= story.excerpt %></div>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+
+    <!-- Main + Sidebar -->
+    <div class="grid-main-side fade-in-3">
+      <div>
+        <div class="section-label">Latest News</div>
+        
+        <% latestNews.forEach(news => { %>
+          <div class="list-item" onclick="location.href='/article/<%= news.id %>'">
+            <div class="list-thumb">IMG</div>
+            <div>
+              <div class="card-meta"><span class="tag tag-<%= news.category %>"><%= news.categoryLabel %></span><span class="card-date"><%= news.date %></span></div>
+              <div class="list-title"><%= news.title %></div>
+              <div class="list-meta"><%= news.meta %></div>
+            </div>
+          </div>
+        <% }) %>
+
+        <button class="btn-ghost mt24">LOAD MORE STORIES →</button>
+      </div>
+
+      <!-- Sidebar -->
+      <aside>
+        <div class="sidebar-widget">
+          <div class="widget-header">Categories</div>
+          <div class="widget-body">
+            <% categories.forEach(cat => { %>
+              <div class="cat-item" onclick="location.href='/category/<%= cat.slug %>'">
+                <span><%= cat.icon %> <%= cat.name %></span>
+                <span class="cat-count"><%= cat.count %></span>
+              </div>
+            <% }) %>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="widget-header">Trending Tags</div>
+          <div class="widget-body">
+            <div class="tag-cloud">
+              <% trendingTags.forEach(tag => { %>
+                <div class="tag-cloud-item" onclick="location.href='/search?tag=<%= tag %>'"><%= tag %></div>
+              <% }) %>
+            </div>
+          </div>
+        </div>
+        <div class="sidebar-widget">
+          <div class="widget-header">Threat Level · Thailand</div>
+          <div class="widget-body">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted);margin-bottom:12px;letter-spacing:1px;">NCSA CURRENT STATUS</div>
+            <div style="font-family:'Syne',sans-serif;font-weight:800;font-size:28px;color:var(--red);"><%= threatLevel %></div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1px;">Updated <%= threatUpdated %></div>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+
+  <%- include('partials/footer') %>
+
+  <script>
+    // Your existing JavaScript
+    function goTo(page, cat) {
+      if (page === 'home') window.location.href = '/';
+      else if (page === 'category') window.location.href = '/category/' + cat;
+      else if (page === 'article') window.location.href = '/article';
+      else if (page === 'search') window.location.href = '/search';
+      else if (page === 'login') window.location.href = '/login';
+      else if (page === 'register') window.location.href = '/register';
+      else if (page === 'admin') window.location.href = '/admin';
+    }
+  </script>
+</body>
+</html>
